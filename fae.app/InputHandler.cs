@@ -10,6 +10,7 @@ namespace fae.console
 {
     public class InputHandler
     {
+
         public async Task<string> Run()
         {
             string[] exitInput = { "ex", "exit", "quit", "q" };
