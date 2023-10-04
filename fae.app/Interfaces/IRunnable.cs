@@ -4,9 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace fae.app.Interfaces
+namespace fae.app
 {
-    internal interface IRunnable
+    public interface IRunnable
     {
+        public string Status { get; }
+        public CancellationToken Token { get; }
+        Task<IRunnable> RunAsync();
     }
 }
