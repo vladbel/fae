@@ -9,9 +9,15 @@ namespace fae.console
         {
             Console.WriteLine("Console started ...");
 
+            var runner = new Runner();
             var inputHandler = new InputHandler();
-            var result = await inputHandler.Run();
 
+            var result = runner.AddTask(inputHandler);
+            Console.WriteLine($"Add to runner Input handler: {result}");
+
+            result = await runner.RunAsync();
+
+            Console.WriteLine($"Runner completed: {result}");
             Console.WriteLine("Console end ...");
         }
     }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Specialized;
+﻿using fae.app;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
@@ -8,10 +9,13 @@ using System.Xml.Linq;
 
 namespace fae.console
 {
-    public class InputHandler
+    public class InputHandler : IRunnable
     {
+        public string Status => throw new NotImplementedException();
 
-        public async Task<string> Run()
+        public CancellationToken Token => throw new NotImplementedException();
+
+        public async Task<IRunnable> RunAsync()
         {
             string[] exitInput = { "ex", "exit", "quit", "q" };
 
@@ -28,9 +32,8 @@ namespace fae.console
                 }
             }
 
-            return "OK";
+            return this;
         }
-
 
 
     }
