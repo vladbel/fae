@@ -16,9 +16,12 @@
             return $"Work Item added. Running tasks: {_running.Count} ";
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public async Task<string> RunAsync()
         {
-
             while (_running.Any())
             {
                 var finishedTask = await Task.WhenAny(_running);
