@@ -8,7 +8,7 @@ namespace fae.app
 {
     public interface IRunnable
     {
-        public string Status { get; }
+        public string Id { get; }
         public CancellationToken Token { get; }
         Task<IRunnable> RunAsync();
     }
