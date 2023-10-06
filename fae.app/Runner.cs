@@ -26,13 +26,17 @@ namespace fae.app
         {
             while (_running.Any())
             {
-                var finishedTask = await Task.WhenAny(_running);
-                _running.Remove(finishedTask);
+                var completedTasks = _running.Where( task =>  task.IsCompleted ).ToList();
+                _running.RemoveAll(task => task.IsCompleted);
 
-                var completedWorkItem = await finishedTask;
-                _completed.Add(completedWorkItem);
+                foreach ( var task in completedTasks )
+                {
+                    var completedWorkItem = await task;
+                    _completed.Add(completedWorkItem);
+                    Console.WriteLine($"Completed task handled by Runner: ID = {completedWorkItem.Id}");
+                }
 
-                Console.WriteLine($"Work Itmem completed: ID = {finishedTask.Id}");
+                await Task.Delay(500);
             }
 
             return "All tasks completed.";

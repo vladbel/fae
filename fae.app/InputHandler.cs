@@ -12,13 +12,14 @@ namespace fae.console
 {
     public class InputHandler : IRunnable
     {
-        public string Id => throw new NotImplementedException();
+        public string Id {get; private set;}
 
         public CancellationToken Token => throw new NotImplementedException();
 
         private IRunner _runner;
         public InputHandler ( IRunner runner ) 
-        { 
+        {
+            Id = "Input handler";
             _runner = runner;
         }
 
