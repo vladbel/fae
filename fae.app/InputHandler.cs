@@ -1,5 +1,6 @@
 ﻿using fae.app;
 using fae.app.Interfaces;
+using fae.app.WorkItems;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -26,7 +27,9 @@ namespace fae.console
         public async Task<IRunnable> RunAsync()
         {
             string[] exitInput = { "ex", "exit", "quit", "q" };
-            string[] newTaskInput = { "t", "tsk", "task" };
+            string[] newBaseTaskInput = { "t", "tsk", "task" };
+            string[] newBaseCancellableTaskInput = { "ct", "ctsk", "ctask" };
+            string[] cancelWorkItemInput = { "cancel", "cnsl"};
 
             while (true)
             {
@@ -36,10 +39,16 @@ namespace fae.console
                 {
                     break;
                 }
-                else if (newTaskInput.Contains(inputItems[0]))
+                else if (newBaseTaskInput.Contains(inputItems[0]))
                 {
                     var id = inputItems.Length > 1 ? inputItems[1] : "Undefined ID";
                     var newWorkItem = new BaseWorkItem(id);
+                    _runner.AddTask(newWorkItem);
+                }
+                else if (newBaseCancellableTaskInput.Contains(inputItems[0]))
+                {
+                    var id = inputItems.Length > 1 ? inputItems[1] : "Undefined ID";
+                    var newWorkItem = new CancellableWorkItem(id);
                     _runner.AddTask(newWorkItem);
                 }
                 else
